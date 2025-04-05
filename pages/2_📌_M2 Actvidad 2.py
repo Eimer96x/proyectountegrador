@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 # Configuración de la página
 st.set_page_config(   
@@ -27,3 +28,29 @@ st.markdown("""
 
 st.header("Solución")
 
+df= pd.read_csv("static\datasets\estudiantes_colombia.csv")
+
+# ... existing code
+
+st.subheader("Primeras 5 filas del dataset")
+st.write(df.head())
+
+st.subheader("Últimas 5 filas del dataset")
+st.write(df.tail())
+
+st.subheader("Resumen del dataset")
+st.write("Información del dataset:")
+st.write(df.info())
+st.write("Descripción estadística del dataset:")
+st.write(df.describe())
+
+st.subheader("Selección de columnas específicas")
+columnas = st.multiselect("Selecciona las columnas que quieres ver:", df.columns)
+if columnas:
+    st.write(df[columnas])
+
+st.subheader("Filtrar estudiantes por promedio")
+promedio_min = st.slider("Selecciona el promedio mínimo:", min_value=0.0, max_value=5.0, value=3.0, step=0.1)
+estudiantes_filtrados = df[df['promedio'] > promedio_min]
+st.write(f"Estudiantes con promedio mayor a {promedio_min}:")
+st.write(estudiantes_filtrados)
