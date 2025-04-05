@@ -28,7 +28,7 @@ st.markdown("""
 
 st.header("Solución")
 
-df= pd.read_csv("static\datasets\estudiantes_colombia.csv")
+df= pd.read_csv("static/datasets/estudiantes_colombia.csv")
 
 # ... existing code
 
